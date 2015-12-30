@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // load playlist
 
     player = new QMediaPlayer;
-    effects_player = new QMediaPlayer;
-    this->load_playlist();
+    effectsPlayer = new QMediaPlayer;
+    this->loadPlaylist();
     this->ui->progress->setMaximum(100);
     this->ui->progress->setMinimum(0);
     this->ui->progress->setValue(0);
@@ -30,73 +30,73 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->webView->setUrl(QUrl::fromLocalFile(settings.getViewerPlaceholder()));
 
     this->setStyleSheet("QMainWindow {background-image: url('"+settings.getBackgroundImage()+"');}");
-    this->fill_genders();
-    this->ui->list_genders->setCurrentRow(0);
+    this->fillGenders();
+    this->ui->listGenders->setCurrentRow(0);
 
 }
 
-void MainWindow::fill_genders(){
-    QList<QString> results = playlist_loader.get_genders();
+void MainWindow::fillGenders(){
+    QList<QString> results = playlistLoader.getGenders();
     QList<QString>::iterator it = results.begin();
 
     for(; it != results.end(); it++){
-        this->ui->list_genders->addItem(*it);
+        this->ui->listGenders->addItem(*it);
     }
 
 }
 
 void MainWindow::on_gender_changed(int row){
-    if (this->ui->list_genders->count() == 0)
+    if (this->ui->listGenders->count() == 0)
         return;
-    this->ui->authors_list->blockSignals(true);
-    this->fill_authors();
-    this->fill_songs();
+    this->ui->authorsList->blockSignals(true);
+    this->fillAuthors();
+    this->fillSongs();
 }
 
-void MainWindow::fill_authors(){
-    QList<QString> results = playlist_loader.get_authors_by_gender(
-                this->ui->list_genders->currentItem()->text());
+void MainWindow::fillAuthors(){
+    QList<QString> results = playlistLoader.getAuthorsByGender(
+                this->ui->listGenders->currentItem()->text());
 
     QList<QString>::iterator it = results.begin();
-    this->ui->authors_list->clear();
+    this->ui->authorsList->clear();
     for(; it != results.end(); it++){
-        this->ui->authors_list->addItem(*it);
+        this->ui->authorsList->addItem(*it);
     }
-    this->ui->authors_list->setCurrentRow(0);
-    this->ui->authors_list->blockSignals(false);
+    this->ui->authorsList->setCurrentRow(0);
+    this->ui->authorsList->blockSignals(false);
 
 }
 
 void MainWindow::on_author_changed(int a){
-    if (this->ui->authors_list->count() == 0){
+    if (this->ui->authorsList->count() == 0){
         return;
     }
-    this->fill_songs();
+    this->fillSongs();
 }
 
-void MainWindow::fill_songs(){
+void MainWindow::fillSongs(){
 
-    if (this->ui->authors_list->count() == 0)
+    if (this->ui->authorsList->count() == 0)
         return;
 
-    if (this->ui->list_genders->count() == 0)
+    if (this->ui->listGenders->count() == 0)
         return;
 
-    this->ui->available_music->clear();
+    this->ui->availableMusic->clear();
 
 
-    QList<Song> results = playlist_loader.get_songs_by_author_gender(
-        this->ui->authors_list->currentItem()->text(),
-        this->ui->list_genders->currentItem()->text());
+    QList<Song> results = playlistLoader.getSongsByAuthorGender(
+        this->ui->authorsList->currentItem()->text(),
+        this->ui->listGenders->currentItem()->text());
 
-    song_ids.clear();
+    songIds.clear();
 
     QList<Song>::iterator it = results.begin();
     for(; it != results.end(); it++){
-        this->ui->available_music->addItem(it->name);
-        song_ids.append(it->id);
+        this->ui->availableMusic->addItem(it->name);
+        songIds.append(it->id);
     }
-    this->ui->available_music->setCurrentRow(0);
+    this->ui->availableMusic->setCurrentRow(0);
 
 }
 
@@ -108,7 +108,7 @@ void MainWindow::on_player_positionChanged(qlonglong position){
 
 void MainWindow::on_player_stateChanged(){
     if (this->player->state() == this->player->StoppedState){
-        this->continue_playing();
+        this->continuePlaying();
     }
 }
 
@@ -117,55 +117,55 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::load_playlist(){
+void MainWindow::loadPlaylist(){
 
     QList<QString>::iterator it;
     for (it = this->playlist.begin(); it != this->playlist.end(); it++){
-        this->ui->available_music->addItem(*it);
+        this->ui->availableMusic->addItem(*it);
     }
-    this->ui->available_music->setCurrentRow(0);
+    this->ui->availableMusic->setCurrentRow(0);
 
 }
 
 void MainWindow::coin_inserted(){
-    effects_player->stop();
-    effects_player->setMedia(QUrl::fromLocalFile(settings.getCoinInsertedSound()));
-    effects_player->play();
+    effectsPlayer->stop();
+    effectsPlayer->setMedia(QUrl::fromLocalFile(settings.getCoinInsertedSound()));
+    effectsPlayer->play();
     creditos += 3;
-    this->ui->creditos_label->setText(QString::number(creditos));
+    this->ui->creditosLabel->setText(QString::number(creditos));
 }
 
-void MainWindow::continue_playing(){
-    if (this->song_data.isEmpty())
+void MainWindow::continuePlaying(){
+    if (this->songData.isEmpty())
         return;
     if (player->state() == player->StoppedState){
-        this->ui->current_playlist->takeItem(0);
-        Song s = playlist_loader.read_song(song_data.dequeue());
+        this->ui->currentPlaylist->takeItem(0);
+        Song s = playlistLoader.readSong(songData.dequeue());
         player->setMedia(QUrl::fromLocalFile(s.path));
         player->play();
-        this->ui->current_song_label->setText(s.author+": "+s.name);
+        this->ui->currentSongLabel->setText(s.author+": "+s.name);
     }
 }
 
-void MainWindow::play_song(){
+void MainWindow::playSong(){
     if (creditos <= 0)
         return;
     creditos -= 1;
-    this->ui->creditos_label->setText(QString::number(creditos));
+    this->ui->creditosLabel->setText(QString::number(creditos));
 
-    effects_player->stop();
-    effects_player->setMedia(QUrl::fromLocalFile(settings.getSongSelectedSound()));
-    effects_player->play();
+    effectsPlayer->stop();
+    effectsPlayer->setMedia(QUrl::fromLocalFile(settings.getSongSelectedSound()));
+    effectsPlayer->play();
 
 
-    int selected_position = this->ui->available_music->currentRow();
+    int selectedPosition = this->ui->availableMusic->currentRow();
 
-    Song s = playlist_loader.read_song(song_ids[selected_position]);
+    Song s = playlistLoader.readSong(songIds[selectedPosition]);
 
-    this->ui->current_playlist->addItem(s.author + ": " + s.name);
+    this->ui->currentPlaylist->addItem(s.author + ": " + s.name);
 
-    song_data.enqueue(song_ids[selected_position]);
-    this->continue_playing();
+    songData.enqueue(songIds[selectedPosition]);
+    this->continuePlaying();
 }
 
 void MainWindow::moveListIndex(QListWidget* list, bool increase){
@@ -188,29 +188,29 @@ void MainWindow::moveListIndex(QListWidget* list, bool increase){
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
     if(e->key() == Qt::Key_Return){
-        this->play_song();
+        this->playSong();
         return;
     }
     // insert coin
     if(e->key() == Qt::Key_Left){
-        this->moveListIndex(this->ui->list_genders, true);
+        this->moveListIndex(this->ui->listGenders, true);
         return;
     }
     if(e->key() == Qt::Key_Right){
-        this->moveListIndex(this->ui->list_genders, false);
+        this->moveListIndex(this->ui->listGenders, false);
         return;
     }
     if(e->key() == Qt::Key_Up){
-        this->moveListIndex(this->ui->authors_list, false);
+        this->moveListIndex(this->ui->authorsList, false);
     }
     if(e->key() == Qt::Key_Down){
-        this->moveListIndex(this->ui->authors_list, true);
+        this->moveListIndex(this->ui->authorsList, true);
     }
     if(e->key() == Qt::Key_S){
-        this->moveListIndex(this->ui->available_music, false);
+        this->moveListIndex(this->ui->availableMusic, false);
     }
     if(e->key() == Qt::Key_X){
-        this->moveListIndex(this->ui->available_music, true);
+        this->moveListIndex(this->ui->availableMusic, true);
     }
     if(e->key() == Qt::Key_Shift){
         this->coin_inserted();

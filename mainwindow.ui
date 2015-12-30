@@ -17,7 +17,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="up_button">
+   <widget class="QPushButton" name="upButton">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -36,7 +36,7 @@
      <string>Up</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="down_button">
+   <widget class="QPushButton" name="downButton">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -49,7 +49,7 @@
      <string>Down</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="play_button">
+   <widget class="QPushButton" name="playButton">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -62,7 +62,7 @@
      <string>Play</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="coin_button">
+   <widget class="QPushButton" name="coinButton">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -75,7 +75,7 @@
      <string>Coin</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="available_music">
+   <widget class="QListWidget" name="availableMusic">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -101,7 +101,7 @@
      <number>24</number>
     </property>
    </widget>
-   <widget class="QListWidget" name="current_playlist">
+   <widget class="QListWidget" name="currentPlaylist">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -529,7 +529,7 @@
      </palette>
     </property>
    </widget>
-   <widget class="QLabel" name="current_song">
+   <widget class="QLabel" name="currentSong">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -575,7 +575,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="creditos_label">
+    <widget class="QLabel" name="creditosLabel">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -623,7 +623,7 @@
       <string>canciones</string>
      </property>
     </widget>
-    <widget class="QLabel" name="current_song_label">
+    <widget class="QLabel" name="currentSongLabel">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -643,7 +643,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QListWidget" name="list_genders">
+   <widget class="QListWidget" name="listGenders">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -656,7 +656,7 @@
      <enum>QListView::LeftToRight</enum>
     </property>
    </widget>
-   <widget class="QListWidget" name="authors_list">
+   <widget class="QListWidget" name="authorsList">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -666,18 +666,18 @@
      </rect>
     </property>
    </widget>
-   <zorder>up_button</zorder>
-   <zorder>down_button</zorder>
-   <zorder>play_button</zorder>
-   <zorder>coin_button</zorder>
-   <zorder>available_music</zorder>
-   <zorder>current_playlist</zorder>
-   <zorder>current_song</zorder>
+   <zorder>upButton</zorder>
+   <zorder>downButton</zorder>
+   <zorder>playButton</zorder>
+   <zorder>coinButton</zorder>
+   <zorder>availableMusic</zorder>
+   <zorder>currentPlaylist</zorder>
+   <zorder>currentSong</zorder>
    <zorder>webView</zorder>
    <zorder>progress</zorder>
    <zorder>frame</zorder>
-   <zorder>list_genders</zorder>
-   <zorder>authors_list</zorder>
+   <zorder>listGenders</zorder>
+   <zorder>authorsList</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -691,7 +691,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>play_button</sender>
+   <sender>playButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>play_song()</slot>
@@ -707,7 +707,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>coin_button</sender>
+   <sender>coinButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>coin_inserted()</slot>
@@ -723,7 +723,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>list_genders</sender>
+   <sender>listGenders</sender>
    <signal>currentRowChanged(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>on_gender_changed(int)</slot>
@@ -739,7 +739,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>authors_list</sender>
+   <sender>authorsList</sender>
    <signal>currentRowChanged(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>on_author_changed(int)</slot>

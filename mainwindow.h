@@ -22,15 +22,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void load_playlist();
-    void continue_playing();
+    void loadPlaylist();
+    void continuePlaying();
     void keyPressEvent(QKeyEvent *);
-    void fill_genders();
-    void fill_authors();
-    void fill_songs();
+    void fillGenders();
+    void fillAuthors();
+    void fillSongs();
 
 public slots:
-    void play_song();
+    void playSong();
     void on_player_positionChanged(qlonglong);
     void on_player_stateChanged();
     void coin_inserted();
@@ -41,13 +41,13 @@ private:
     Ui::MainWindow *ui;
     RockoSettings settings;
     QMediaPlayer* player;
-    QMediaPlayer* effects_player;
+    QMediaPlayer* effectsPlayer;
     QList<QString> playlist;
-    QList<int> song_ids;
-    QQueue<int> song_data;
+    QList<int> songIds;
+    QQueue<int> songData;
 
     int creditos;
-    PlaylistLoader playlist_loader;
+    PlaylistLoader playlistLoader;
 
     void moveListIndex(QListWidget*, bool);
 };

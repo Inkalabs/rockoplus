@@ -12,11 +12,11 @@ class PlaylistLoader
 {
 public:
     PlaylistLoader();
-    QList<QString> get_genders();
-    QList<QString> get_authors();
-    QList<QString> get_authors_by_gender(QString gender);
-    QList<Song> get_songs_by_author_gender(QString, QString);
-    Song read_song(int);
+    QList<QString> getGenders();
+    QList<QString> getAuthors();
+    QList<QString> getAuthorsByGender(QString gender);
+    QList<Song> getSongsByAuthorGender(QString, QString);
+    Song readSong(int);
 private:
     RockoSettings settings;
     QSqlDatabase createConnection();
