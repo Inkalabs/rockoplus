@@ -694,7 +694,7 @@
    <sender>playButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>play_song()</slot>
+   <slot>playSong()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>540</x>
@@ -710,7 +710,7 @@
    <sender>coinButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>coin_inserted()</slot>
+   <slot>coinInserted()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>524</x>
@@ -756,8 +756,8 @@
   </connection>
  </connections>
  <slots>
-  <slot>play_song()</slot>
-  <slot>coin_inserted()</slot>
+  <slot>playSong()</slot>
+  <slot>coinInserted()</slot>
   <slot>on_player_positionChanged(qlonglong)</slot>
   <slot>on_player_stateChanged()</slot>
   <slot>on_gender_changed(int)</slot>

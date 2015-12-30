@@ -127,7 +127,7 @@ void MainWindow::loadPlaylist(){
 
 }
 
-void MainWindow::coin_inserted(){
+void MainWindow::coinInserted(){
     effectsPlayer->stop();
     effectsPlayer->setMedia(QUrl::fromLocalFile(settings.getCoinInsertedSound()));
     effectsPlayer->play();
@@ -213,7 +213,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         this->moveListIndex(this->ui->availableMusic, true);
     }
     if(e->key() == Qt::Key_Shift){
-        this->coin_inserted();
+        this->coinInserted();
         return;
     }
 

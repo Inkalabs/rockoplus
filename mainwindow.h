@@ -31,9 +31,10 @@ public:
 
 public slots:
     void playSong();
+    void coinInserted();
+
     void on_player_positionChanged(qlonglong);
     void on_player_stateChanged();
-    void coin_inserted();
     void on_gender_changed(int);
     void on_author_changed(int);
 
