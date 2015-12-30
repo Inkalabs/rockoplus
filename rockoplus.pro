@@ -12,15 +12,18 @@ TARGET = rockoplus
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    rockosettings.cpp \
-    playlistloader.cpp \
-    song.cpp
+SOURCES += sources/main.cpp\
+        sources/mainwindow.cpp \
+    sources/rockosettings.cpp \
+    sources/playlistloader.cpp \
+    sources/song.cpp
 
-HEADERS  += mainwindow.h \
-    rockosettings.h \
-    playlistloader.h \
-    song.h
+HEADERS  += headers/mainwindow.h \
+    headers/rockosettings.h \
+    headers/playlistloader.h \
+    headers/song.h
 
-FORMS    += mainwindow.ui
+FORMS    += ui/mainwindow.ui
+
+
+

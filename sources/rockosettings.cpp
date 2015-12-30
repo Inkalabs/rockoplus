@@ -1,16 +1,16 @@
-#include "rockosettings.h"
+#include "headers/rockosettings.h"
 
 RockoSettings::RockoSettings(){
 
 }
 
 QString RockoSettings::getCoinInsertedSound(){
-    return "/Users/jose/Downloads/chela-destapar.mp3";
+    return "/Users/jose/repo/rockoplus/res/sounds/coin.mp3";
 }
 
 
 QString RockoSettings::getSongSelectedSound(){
-    return "/Users/jose/Downloads/chela-sirviendo.mp3";
+    return "/Users/jose/repo/rockoplus/res/sounds/play.mp3";
 }
 
 QString RockoSettings::getViewerPlaceholder(){
